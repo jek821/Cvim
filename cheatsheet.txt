@@ -1,47 +1,92 @@
-NVIM CHEATSHEET
+================================================================================
+                           neovim cheatsheet
+================================================================================
 
-== General ==
-qq (insert)     - Exit insert mode
-<space>w        - Save file
-<space>q        - Quit window
-<space>?        - Open this cheatsheet
+general
+--------
+<space>          leader key
+qq               escape from insert mode
+<space>w         save file
+<space>q         quit
+<space>?         open this cheatsheet
 
-== File Navigation ==
-<space>ff       - Find files
-<space>gr       - Grep search
-Ctrl-q          - Close telescope
-Ctrl-x          - Open in horizontal split
-Ctrl-s          - Open in vertical split
+window navigation
+-----------------
+ctrl+h           move to left window
+ctrl+j           move to window below
+ctrl+k           move to window above
+ctrl+l           move to right window
 
-== File Tree ==
-<space>e        - Toggle file tree
-Enter           - Open file
-Ctrl-x          - Open horizontal split
-Ctrl-s          - Open vertical split
+terminal mode
+-------------
+<space>tt        open terminal in bottom split
+esc              exit terminal mode to normal mode
+ctrl+q           exit terminal and close window
+ctrl+h/j/k/l     navigate to other windows from terminal
 
-== Windows ==
-Ctrl-h/j/k/l    - Navigate windows
+file explorer (nvim-tree)
+-------------------------
+<space>e         toggle file explorer
+ctrl+x           open file in horizontal split
+ctrl+s           open file in vertical split
 
-== Terminal ==
-<space>tt       - Open terminal
-Esc             - Exit terminal mode
-Ctrl-q          - Close terminal
+fuzzy finder (telescope)
+------------------------
+<space>ff        find files
+<space>gr        live grep (search text in files)
+ctrl+q           close telescope
+ctrl+s           open file in vertical split
 
-== LSP ==
-gd              - Go to definition
-K               - Hover docs
-gr              - Find references
-<space>rn       - Rename
-<space>ca       - Code actions
-<space>d        - Show diagnostic
-]d              - Next diagnostic
-[d              - Previous diagnostic
-Ctrl-Space      - Trigger completion
+lsp (language server)
+---------------------
+gd               go to definition
+gr               show references
+K                show hover documentation
+<space>rn        rename symbol
+<space>ca        code actions
+<space>d         show diagnostics in float
+]d               go to next diagnostic
+[d               go to previous diagnostic
 
-== Debugger ==
-<space>b        - Toggle breakpoint
-F5              - Start/continue
-F10             - Step over
-F11             - Step into
-F12             - Step out
-<space>dr       - Debug REPL
+compilation
+-----------
+<space>cc        compile current c file with -g flag (for debugging)
+
+debugging (dap)
+---------------
+<space>b         toggle breakpoint on current line
+f5               start/continue debugging
+f10              step over (execute current line)
+f11              step into (enter function)
+f12              step out (exit function)
+<space>dr        open debug repl
+<space>dt        toggle debug ui
+
+autocompletion
+--------------
+ctrl+space       trigger completion menu
+enter            confirm selection
+tab              next completion item
+shift+tab        previous completion item
+
+================================================================================
+workflow: debugging c programs
+================================================================================
+1. open your .c file in neovim
+2. set breakpoints with <space>b on lines you want to pause at
+3. compile with <space>cc (this adds -g flag for debug symbols)
+4. start debugger with f5, enter path to executable (e.g., ./main)
+5. debug ui opens showing variables, stack, breakpoints
+6. use f10 to step over, f11 to step into functions
+7. inspect variables in the left panel
+8. continue with f5 or quit debugger
+
+================================================================================
+tips
+================================================================================
+- files auto-save when you leave the buffer
+- use <space>e to quickly toggle file tree
+- use <space>ff to quickly find files by name
+- use <space>gr to search for text across all files
+- set breakpoints BEFORE starting the debugger
+- always compile with -g flag when debugging (use <space>cc)
