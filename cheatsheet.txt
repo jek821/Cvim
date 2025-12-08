@@ -1,0 +1,47 @@
+NVIM CHEATSHEET
+
+== General ==
+qq (insert)     - Exit insert mode
+<space>w        - Save file
+<space>q        - Quit window
+<space>?        - Open this cheatsheet
+
+== File Navigation ==
+<space>ff       - Find files
+<space>gr       - Grep search
+Ctrl-q          - Close telescope
+Ctrl-x          - Open in horizontal split
+Ctrl-s          - Open in vertical split
+
+== File Tree ==
+<space>e        - Toggle file tree
+Enter           - Open file
+Ctrl-x          - Open horizontal split
+Ctrl-s          - Open vertical split
+
+== Windows ==
+Ctrl-h/j/k/l    - Navigate windows
+
+== Terminal ==
+<space>tt       - Open terminal
+Esc             - Exit terminal mode
+Ctrl-q          - Close terminal
+
+== LSP ==
+gd              - Go to definition
+K               - Hover docs
+gr              - Find references
+<space>rn       - Rename
+<space>ca       - Code actions
+<space>d        - Show diagnostic
+]d              - Next diagnostic
+[d              - Previous diagnostic
+Ctrl-Space      - Trigger completion
+
+== Debugger ==
+<space>b        - Toggle breakpoint
+F5              - Start/continue
+F10             - Step over
+F11             - Step into
+F12             - Step out
+<space>dr       - Debug REPL
