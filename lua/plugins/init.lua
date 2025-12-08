@@ -63,6 +63,15 @@ local plugins = {
     end,
   },
 
+  -- Auto-pairs (auto-close brackets, braces, quotes)
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("plugins.autopairs")
+    end,
+  },
+
   -- Debugging
   {
     "mfussenegger/nvim-dap",
