@@ -33,6 +33,7 @@ Add Go binaries to your PATH in `~/.bashrc` or `~/.zshrc`:
 ```bash
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
+Then refresh with `source ~/.bashrc`
 
 ## Debugging Support
 
