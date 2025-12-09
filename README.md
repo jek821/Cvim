@@ -24,7 +24,7 @@ A modular Neovim configuration with LSP, debugging, and autocompletion support f
 
 ## Language Server Dependencies
 
-- **Python**: `pyright` (install via npm)
+- **Python**: `pyright` (install via npm `npm install -g pyright`)
 - **Go**: `gopls` (install via `go install golang.org/x/tools/gopls@latest`)
 
 ## PATH Configuration
