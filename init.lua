@@ -1,16 +1,6 @@
 -----------------------------------------------------------
 -- Main init.lua - Entry point for your Neovim config
 -----------------------------------------------------------
-
--- Suppress lspconfig deprecation warning
---local notify = vim.notify
---vim.notify = function(msg, ...)
- -- if msg:match("lspconfig") then
-   -- return
-  --end
-  --notify(msg, ...)
---end
-
 -----------------------------------------------------------
 -- Bootstrap lazy.nvim
 -----------------------------------------------------------
@@ -36,3 +26,6 @@ require("core.autocmds")   -- Autocommands
 -- Load plugins
 -----------------------------------------------------------
 require("plugins")
+
+
+vim.opt.clipboard = "unnamedplus"
