@@ -1,7 +1,6 @@
 -----------------------------------------------------------
 -- Keymaps
 -----------------------------------------------------------
-vim.notify("KEYMAP FILE LOADED", vim.log.levels.WARN)
 
 local keymap = vim.keymap.set
 vim.g.mapleader = " "
