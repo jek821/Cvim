@@ -63,6 +63,16 @@ local plugins = {
     end,
   },
 
+    -- LSP signature help (show params while typing)
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    config = function()
+      require("plugins.signature")
+    end,
+  },
+
+
   -- Auto-pairs (auto-close brackets, braces, quotes)
   {
     "windwp/nvim-autopairs",
