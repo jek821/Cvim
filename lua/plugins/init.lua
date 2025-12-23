@@ -83,6 +83,16 @@ local plugins = {
       require("plugins.dap")
     end,
   },
+
+  -- Formatting
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    config = function()
+      require("plugins.conform")
+    end,
+  },
 }
 
 require("lazy").setup(plugins, {})
