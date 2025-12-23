@@ -3,6 +3,9 @@
 -----------------------------------------------------------
 
 local keymap = vim.keymap.set
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 
 -----------------------------------------------------------
 -- General keymaps
@@ -51,11 +54,13 @@ keymap("n", "<leader>?", ":vsplit ~/.config/nvim/cheatsheet.txt<CR>", { noremap 
 -----------------------------------------------------------
 -- Telescope (fuzzy finder)
 -----------------------------------------------------------
-local telescope_ok, builtin = pcall(require, "telescope.builtin")
-if telescope_ok then
-  keymap("n", "<leader>ff", builtin.find_files, {})
-  keymap("n", "<leader>gr", builtin.live_grep, {})
-end
+keymap("n", "<leader>ff", function()
+  require("telescope.builtin").find_files()
+end, { desc = "Find files" })
+
+keymap("n", "<leader>fg", function()
+  require("telescope.builtin").live_grep()
+end, { desc = "Live grep" })
 
 -----------------------------------------------------------
 -- Debugging (DAP)
@@ -73,6 +78,6 @@ keymap("n", "<leader>dt", function() require("dapui").toggle() end, { desc = "De
 -----------------------------------------------------------
 keymap("n", "<leader>cc", function()
   local file = vim.fn.expand("%")
-  local output = vim.fn.expand("%:r")
+  local output = vim.fn<ScrollWheelUp>expand("%:r")
   vim.cmd("botright 10split | terminal gcc -g " .. file .. " -o " .. output)
 end, { desc = "Compile C file with -g (debug)" })
