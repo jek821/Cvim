@@ -1,9 +1,15 @@
 -----------------------------------------------------------
 -- Treesitter Configuration
 -----------------------------------------------------------
-
-require("nvim-treesitter.configs").setup({
-  ensure_installed = { "c", "python", "go" },
-  highlight = { enable = true },
-  indent = { enable = true },
-})
+return {
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  priority = 1000,
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      highlight = { enable = true },
+      indent = { enable = true },
+    })
+  end,
+}
