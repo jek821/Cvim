@@ -78,6 +78,6 @@ keymap("n", "<leader>dt", function() require("dapui").toggle() end, { desc = "De
 -----------------------------------------------------------
 keymap("n", "<leader>cc", function()
   local file = vim.fn.expand("%")
-  local output = vim.fn<ScrollWheelUp>expand("%:r")
+  local output = vim.fn.expand("%:r")
   vim.cmd("botright 10split | terminal gcc -g " .. file .. " -o " .. output)
 end, { desc = "Compile C file with -g (debug)" })
