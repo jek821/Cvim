@@ -58,6 +58,7 @@ local plugins = {
   -- LSP configuration
   {
     "neovim/nvim-lspconfig",
+    dependencies = { "hrsh7th/nvim-cmp" },
     config = function()
       require("plugins.lsp")
     end,

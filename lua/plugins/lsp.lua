@@ -4,50 +4,9 @@
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
------------------------------------------------------------
--- Start clangd for C/C++ files
------------------------------------------------------------
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp" },
-  callback = function(ev)
-    vim.lsp.start({
-      name = "clangd",
-      cmd = { "clangd" },
-      root_dir = vim.fs.root(ev.buf, { "compile_commands.json", ".git" }) or vim.fn.getcwd(),
-      capabilities = capabilities,
-    })
-  end,
-})
+vim.lsp.config('clangd', { capabilities = capabilities })
 
------------------------------------------------------------
--- Start pyright for Python files
------------------------------------------------------------
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python",
-  callback = function(ev)
-    vim.lsp.start({
-      name = "pyright",
-      cmd = { "pyright-langserver", "--stdio" },
-      root_dir = vim.fs.root(ev.buf, { "pyproject.toml", "setup.py", ".git" }) or vim.fn.getcwd(),
-      capabilities = capabilities,
-    })
-  end,
-})
-
------------------------------------------------------------
--- Start gopls for Go files
------------------------------------------------------------
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function(ev)
-    vim.lsp.start({
-      name = "gopls",
-      cmd = { "gopls" },
-      root_dir = vim.fs.root(ev.buf, { "go.mod", ".git" }) or vim.fn.getcwd(),
-      capabilities = capabilities,
-    })
-  end,
-})
+vim.lsp.enable({ 'clangd' })
 
 -----------------------------------------------------------
 -- LSP keymaps (activated when LSP attaches to buffer)
