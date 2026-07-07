@@ -26,6 +26,7 @@ local plugins = {
   -- Syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master", -- pin to the classic API; `main` is a rewrite without nvim-treesitter.configs
     build = ":TSUpdate",
     config = function()
       require("plugins.treesitter")
