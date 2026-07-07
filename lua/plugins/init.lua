@@ -55,12 +55,21 @@ local plugins = {
     end,
   },
 
-  -- LSP configuration
+  -- Tool manager (LSP servers, formatters, debug adapters)
+  { "mason-org/mason.nvim" },
+
+  -- LSP configuration (+ Mason integration)
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/nvim-cmp" },
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     config = function()
-      require("plugins.lsp")
+      require("plugins.lsp")    -- capabilities + LspAttach keymaps
+      require("plugins.mason")  -- install & enable tools via Mason
     end,
   },
 

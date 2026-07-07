@@ -35,11 +35,41 @@ keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = true })
 keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", { noremap = true })
 
 -----------------------------------------------------------
--- Terminal
+-- Terminal (toggle a single persistent shell)
 -----------------------------------------------------------
+-- One reusable terminal: <leader>tt shows/hides it, processes keep
+-- running while it's hidden. <leader>tk kills it (and its processes).
+local term = { buf = nil, win = nil }
+
 keymap("n", "<leader>tt", function()
-  vim.cmd("botright 15split | terminal")
-end)
+  -- Visible -> hide it (window closes, shell + processes keep running).
+  if term.win and vim.api.nvim_win_is_valid(term.win) then
+    vim.api.nvim_win_hide(term.win)
+    term.win = nil
+    return
+  end
+
+  -- Hidden/new -> open a split and show the terminal.
+  vim.cmd("botright 15split")
+  term.win = vim.api.nvim_get_current_win()
+
+  if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
+    vim.api.nvim_win_set_buf(term.win, term.buf) -- reuse existing shell
+  else
+    vim.cmd("terminal")
+    term.buf = vim.api.nvim_get_current_buf()
+  end
+
+  vim.cmd("startinsert")
+end, { desc = "Toggle terminal" })
+
+keymap("n", "<leader>tk", function()
+  if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
+    vim.api.nvim_buf_delete(term.buf, { force = true }) -- closes window + kills job
+  end
+  term.buf = nil
+  term.win = nil
+end, { desc = "Kill terminal" })
 
 -----------------------------------------------------------
 -- File explorer

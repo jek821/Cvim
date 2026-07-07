@@ -2,11 +2,11 @@
 -- Core Vim Options
 -----------------------------------------------------------
 
--- Tab settings
-vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
+-- Tab settings (Linux kernel style: real tabs, 8 columns wide)
+vim.o.expandtab = false
+vim.o.tabstop = 8
+vim.o.softtabstop = 8
+vim.o.shiftwidth = 8
 
 -- UI settings
 vim.o.number = true

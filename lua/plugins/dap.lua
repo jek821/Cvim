@@ -71,3 +71,30 @@ dap.configurations.c = {
 
 -- Copy C config to C++
 dap.configurations.cpp = dap.configurations.c
+
+-----------------------------------------------------------
+-- Python (debugpy) Adapter Configuration
+-----------------------------------------------------------
+-- Run the adapter with Mason's debugpy install (its own venv), not the
+-- system Python. The debuggee still runs under the project's python below.
+dap.adapters.python = {
+  type = "executable",
+  command = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python",
+  args = { "-m", "debugpy.adapter" },
+}
+
+-----------------------------------------------------------
+-- Python Debug Configuration
+-----------------------------------------------------------
+dap.configurations.python = {
+  {
+    name = "Launch file",
+    type = "python",
+    request = "launch",
+    program = "${file}",
+    cwd = "${workspaceFolder}",
+    pythonPath = function()
+      return "python"
+    end,
+  },
+}

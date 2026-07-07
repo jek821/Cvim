@@ -4,9 +4,10 @@
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-vim.lsp.config('clangd', { capabilities = capabilities })
-
-vim.lsp.enable({ 'clangd' })
+-- Advertise nvim-cmp's completion capabilities to every LSP server.
+-- Mason (mason-lspconfig) installs and enables clangd + pyright, so
+-- there's no manual vim.lsp.enable here.
+vim.lsp.config('*', { capabilities = capabilities })
 
 -----------------------------------------------------------
 -- LSP keymaps (activated when LSP attaches to buffer)

@@ -1,36 +1,45 @@
 # Neovim Configuration
 
-A focused Neovim setup for **C programming** — LSP, formatting, completion, and
-debugging via clangd, mirroring a clangd-based VS Code workflow.
+A focused Neovim setup for **C and Python** — LSP, formatting, completion, and
+debugging, with all tooling installed and managed automatically by Mason.
 
 ## Features
 
 - 🎨 Catppuccin colorscheme
 - 🔍 Fuzzy file finding & live grep with Telescope
 - 🌳 File explorer with nvim-tree
-- 🧠 C language support via **clangd** (diagnostics, go-to-definition, hover, rename)
-- 🌲 Treesitter syntax highlighting & indentation for C
+- 🧠 Language support: **clangd** (C) & **pyright** (Python) — diagnostics,
+  go-to-definition, hover, rename
+- 🌲 Treesitter syntax highlighting & indentation for C and Python
 - ✨ Auto-completion with nvim-cmp + LuaSnip
 - ✍️ LSP signature help while typing (lsp_signature)
-- 🧹 Format-on-save with clang-format (reads the project's `.clang-format`)
-- 🐛 C debugging (nvim-dap + dap-ui)
+- 🧹 Format-on-save: clang-format (C, reads the project's `.clang-format`) & ruff (Python)
+- 🐛 Debugging (nvim-dap + dap-ui): gdb (C) & debugpy (Python)
+- 📦 Tool management with **Mason** — LSP servers, formatters and debug
+  adapters install automatically on first launch
 - 🔧 Auto-closing brackets/quotes (autopairs)
-- 🖥️ Integrated terminal split (`<leader>tt`)
+- 🖥️ Toggleable integrated terminal (`<leader>tt` / `<leader>tk`)
 - 📋 Built-in keybinding cheatsheet (`<leader>?`)
 - 💾 Auto-save on buffer leave
 
 ## Required Dependencies
 
+Only a few things need to be on your system — Mason installs the LSP servers,
+formatters and debug adapters (clangd, pyright, clang-format, ruff, debugpy)
+for you on first launch.
+
 - **Neovim >= 0.11** (uses the `vim.lsp.config` / `vim.lsp.enable` API)
 - git
-- gcc
-- gdb
-- **clangd** and **clang-format** — `dnf install clang-tools-extra` (Fedora)
+- gcc (compile C) and gdb (debug C)
+- python3 (run/debug Python)
+- node (Mason uses it to install pyright)
 - ripgrep (for Telescope live grep)
 - A [Nerd Font](https://www.nerdfonts.com/) (optional, for file-tree/completion icons)
 
 Plugins are managed by [lazy.nvim](https://github.com/folke/lazy.nvim), which
-bootstraps itself on first launch.
+bootstraps itself on first launch. Language tooling is managed by
+[Mason](https://github.com/mason-org/mason.nvim) — run `:Mason` to see or
+update the installed tools.
 
 ## How clangd finds the project
 
@@ -49,24 +58,28 @@ Highlights:
 | --- | --- |
 | `<leader>ff` / `<leader>fg` | Find files / live grep (Telescope) |
 | `<leader>e` | Toggle file explorer |
-| `<leader>tt` | Open terminal in bottom split |
+| `<leader>tt` / `<leader>tk` | Toggle terminal (processes survive) / kill it |
 | `<leader>cc` | Compile current C file with `-g` (for debugging) |
 | `gd` / `gr` / `K` | Go to definition / references / hover docs |
 | `<leader>rn` / `<leader>ca` | Rename symbol / code actions |
 | `]d` / `[d` / `<leader>d` | Next / previous / show diagnostic |
 | `<leader>b` / `f5` | Toggle breakpoint / start-continue debugging |
 
-## Debugging (C)
+## Debugging
 
-Set breakpoints with `<leader>b`, compile with `<leader>cc` (adds `-g`), then
-start the debugger with `f5` and enter the path to the executable.
+**C** — set breakpoints with `<leader>b`, compile with `<leader>cc` (adds
+`-g`), then start the debugger with `f5` and enter the path to the executable.
+
+**Python** — set breakpoints with `<leader>b`, then start the debugger with
+`f5`; it launches the current file directly (no compile step).
 
 ## Troubleshooting
 
 ### LSP not working
 ```vim
 :checkhealth lsp   " Inspect attached LSP clients and config
-:LspRestart        " Restart clangd
+:LspRestart        " Restart the language server (clangd / pyright)
+:Mason             " Manage LSP servers, formatters, debug adapters
 ```
 
 ### Plugins not installing

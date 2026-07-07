@@ -17,11 +17,12 @@ ctrl+j           move to window below
 ctrl+k           move to window above
 ctrl+l           move to right window
 
-terminal mode
--------------
-<space>tt        open terminal in bottom split
+terminal
+--------
+<space>tt        toggle terminal (hide/show; processes keep running)
+<space>tk        kill terminal (ends the shell and everything in it)
 esc              exit terminal mode to normal mode
-ctrl+q           exit terminal and close window
+ctrl+q           hide terminal window (shell keeps running in background)
 ctrl+h/j/k/l     navigate to other windows from terminal
 
 file explorer (nvim-tree)
@@ -33,11 +34,11 @@ ctrl+s           open file in vertical split
 fuzzy finder (telescope)
 ------------------------
 <space>ff        find files
-<space>gr        live grep (search text in files)
+<space>fg        live grep (search text in files)
 ctrl+q           close telescope
 ctrl+s           open file in vertical split
 
-lsp (language server)
+lsp (language server)     [C via clangd, Python via pyright]
 ---------------------
 gd               go to definition
 gr               show references
@@ -48,11 +49,12 @@ K                show hover documentation
 ]d               go to next diagnostic
 [d               go to previous diagnostic
 
-compilation
------------
-<space>cc        compile current c file with -g flag (for debugging)
+compilation (C only)
+--------------------
+<space>cc        compile current C file with -g flag (for debugging)
+                 (Python is interpreted -- no compile step needed)
 
-debugging (dap)
+debugging (dap)  [C via gdb, Python via debugpy]
 ---------------
 <space>b         toggle breakpoint on current line
 f5               start/continue debugging
@@ -82,6 +84,16 @@ workflow: debugging c programs
 8. continue with f5 or quit debugger
 
 ================================================================================
+workflow: debugging python programs
+================================================================================
+1. open your .py file in neovim
+2. set breakpoints with <space>b on lines you want to pause at
+3. start debugger with f5 (no compile step -- it runs the current file)
+4. debug ui opens showing variables, stack, breakpoints
+5. use f10 to step over, f11 to step into functions
+6. continue with f5 or quit debugger
+
+================================================================================
 tips
 ================================================================================
 - files auto-save when you leave the buffer
@@ -89,4 +101,6 @@ tips
 - use <space>ff to quickly find files by name
 - use <space>gr to search for text across all files
 - set breakpoints BEFORE starting the debugger
-- always compile with -g flag when debugging (use <space>cc)
+- always compile with -g flag when debugging C (use <space>cc)
+- LSP servers, formatters and debuggers are managed by Mason -- run
+  :Mason to see/update them (clangd, pyright, clang-format, ruff, debugpy)
