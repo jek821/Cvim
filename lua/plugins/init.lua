@@ -3,6 +3,15 @@
 -----------------------------------------------------------
 
 local plugins = {
+  -- Start screen
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    config = function()
+      require("plugins.alpha")
+    end,
+  },
+
   -- Colorscheme
   { 
     "catppuccin/nvim", 
